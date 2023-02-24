@@ -3,8 +3,8 @@ import s from './Profile.module.css'
 import MyPosts from "./MyPosts/MyPosts";
 const Profile = () => {
     return (
-        <div className={s.content}>
-            <div>
+        <div>
+            <div className={s.card}>
                 <img src='https://webmg.ru/wp-content/uploads/2022/11/i-25-52-2048x1365.jpeg' alt='card'></img>
             </div>
             <div className={s.avatar}>
