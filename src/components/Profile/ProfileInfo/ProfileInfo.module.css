@@ -1,0 +1,11 @@
+.card img{
+    width: 100%;
+}
+.avatar img{
+    width: 100px;
+    height: 100px;
+}
+
+.descriptionBlock{
+    padding: 10px;
+}
