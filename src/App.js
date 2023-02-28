@@ -10,15 +10,21 @@ import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 
 
-const App = ({dialogs, messages, posts}) =>   {
+const App = ({state}) =>   {
   return (
       <BrowserRouter>
           <div className='app-wrapper'>
               <Header/>
-              <Navbar/>
+
+              <Navbar userFriends={state.sideBar.userFriends}/>
               <div className='app-wrapper-content'>
-                  <Route path="/dialogs" render={ () => <Dialogs dialogs={dialogs} messages={messages}/> }/>
-                  <Route path="/profile" render={ () => <Profile posts={posts}/> }/>
+                  <Route path="/dialogs"
+                         render={ () => <Dialogs
+                             state={state.dialogsPage}
+                             /> }/>
+                  <Route path="/profile"
+                         render={ () => <Profile
+                             state={state.profilePage}/> }/>
                   <Route path="/news" component={News}/>
                   <Route path="/music" component={Music}/>
                   <Route path="/settings" component={Settings}/>

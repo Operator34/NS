@@ -20,3 +20,11 @@ display: grid;
 .messages.message{
     color: white;
 }
+.avatar{
+    width: 30px;
+    border-radius: 20px;
+    margin-right: 10px;
+
+
+
+}
