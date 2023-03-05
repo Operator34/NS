@@ -6,7 +6,7 @@ import {
     sendMessageCreator,
     updateNewMessageBodyCreator
 
-} from "../../redux/state";
+} from "../../redux/dialogs-reducer";
 
 const newMessage = React.createRef()
 const Dialogs = ({store, dispatch}) => {
