@@ -5,18 +5,19 @@ import { addPostCreator, updateNewPostTextCreator} from "../../../redux/profile-
 
 
 const newPostElement = React.createRef() //создаем ссылку, привязываем ссылку к textarea
-const MyPosts = ( {posts, newPostText, dispatch} ) => {
+const MyPosts = ( {posts, newPostText, dispatch, updateNewPostText, addPost}  ) => {
 
     const postsElements = posts.map(p => <Post message={p.message} likeCount={p.likesCount} key={p.id}/>)
 
-    const addPost = () => {
-       dispatch(addPostCreator())
+    const onAddPost = () => {
+       // dispatch(addPostCreator())
+        addPost()
 
     }
     const onPostChange = () => {
         const text = newPostElement.current.value
-        console.log(text)
-        dispatch(updateNewPostTextCreator(text))
+        // dispatch(updateNewPostTextCreator(text))
+        updateNewPostText(text)
     }
     return (
         <div className={s.postsBlock}>
@@ -26,7 +27,7 @@ const MyPosts = ( {posts, newPostText, dispatch} ) => {
                    <textarea value={newPostText} ref={newPostElement} onChange={onPostChange} />
                </div>
                <div>
-                    <button onClick={addPost}>Add post</button>
+                    <button onClick={onAddPost}>Add post</button>
                </div>
            </div>
             <div className={s.posts}>
