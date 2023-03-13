@@ -2,7 +2,7 @@ import s from "./Friends.module.css"
 import FriendItem from "./Friend/FriendItem";
 
 const Friends = ({userFriends}) => {
-    const userFriend = userFriends.map( u => <FriendItem key={u.id} name={u.name}/> )
+    const userFriend = userFriends.map( u => <FriendItem name={u.name} key={u.id}/> )
     return(
         <div className={s.container}>
             <h3>Friends</h3>

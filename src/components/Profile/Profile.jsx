@@ -7,9 +7,7 @@ const Profile = ({store}) => {
     return (
         <div>
             <ProfileInfo />
-            <MyPostsContainer
-                store={store}
-            />
+            <MyPostsContainer/>
         </div>
     )
 }
