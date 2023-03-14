@@ -6,12 +6,12 @@ const SET_TOTAL_USERS_COUNT ="SET_TOTAL_USERS_COUNT"
 const TOGGLE_IS_LOADING ="TOGGLE_IS_LOADING"
 
 //action creator
-export const followAC = (userId) => ({type: FALLOW, userId})
-export const unfollowAC = (userId) => ({type: UNFALLOW, userId})
-export const setUsersAC = (users) => ({type: SET_USERS, users})
-export const setCurrentPageAC = (currentPage) => ({type : SET_CURRENT_PAGE, currentPage})
-export const setUsersTotalCountAC = (totalUsersCount) => ({type : SET_TOTAL_USERS_COUNT, count: totalUsersCount})
-export const toogleIsLoadingAC = (isLoading) => ({type:"TOGGLE_IS_LOADING", isLoading})
+export const follow = (userId) => ({type: FALLOW, userId})
+export const unfollow = (userId) => ({type: UNFALLOW, userId})
+export const setUsers = (users) => ({type: SET_USERS, users})
+export const setCurrentPage = (currentPage) => ({type : SET_CURRENT_PAGE, currentPage})
+export const setTotalUsersCount = (totalUsersCount) => ({type : SET_TOTAL_USERS_COUNT, count: totalUsersCount})
+export const toggleIsLoading = (isLoading) => ({type:"TOGGLE_IS_LOADING", isLoading})
 
 const initialState = {
     users: [],

@@ -3,12 +3,12 @@ import {connect} from "react-redux";
 import  axios from "axios";
 
 import {
-    followAC,
-    unfollowAC,
-    setUsersAC,
-    setCurrentPageAC,
-    setUsersTotalCountAC,
-    toogleIsLoadingAC
+    follow,
+    unfollow,
+    setUsers,
+    setCurrentPage,
+    setTotalUsersCount,
+    toggleIsLoading
 } from "../../redux/users-reducer";
 import Users from "./Users";
 import Loader from "../../assets/images/Loader.svg"
@@ -59,30 +59,39 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return{
-        setUsers: (users) => {
-            dispatch(setUsersAC(users))
-        },
-        setCurrentPage: (pageNumber) => {
-            dispatch(setCurrentPageAC(pageNumber))
-        },
-        setTotalUsersCount: (totalCount) => {
-            dispatch(setUsersTotalCountAC(totalCount))
-        },
-        follow: (userId) => {
-            dispatch(followAC(userId))
-        },
-        unfollow: (userId) => {
-            dispatch(unfollowAC(userId))
-        },
-        toggleIsLoading: (isLoading) => {
-            dispatch(toogleIsLoadingAC(isLoading))
-        }
+// const mapDispatchToProps = (dispatch) => {
+//     return{
+//         setUsers: (users) => {
+//             dispatch(setUsersAC(users))
+//         },
+//         setCurrentPage: (pageNumber) => {
+//             dispatch(setCurrentPageAC(pageNumber))
+//         },
+//         setTotalUsersCount: (totalCount) => {
+//             dispatch(setUsersTotalCountAC(totalCount))
+//         },
+//         follow: (userId) => {
+//             dispatch(followAC(userId))
+//         },
+//         unfollow: (userId) => {
+//             dispatch(unfollowAC(userId))
+//         },
+//         toggleIsLoading: (isLoading) => {
+//             dispatch(toogleIsLoadingAC(isLoading))
+//         }
+//
+//     }
+// }
+//это делает connect под капотом
 
+
+export default connect(mapStateToProps,
+    {
+        setUsers,
+        setCurrentPage,
+        setTotalUsersCount,
+        follow,
+        unfollow,
+        toggleIsLoading
     }
-}
-
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)
+)(UsersContainer)
