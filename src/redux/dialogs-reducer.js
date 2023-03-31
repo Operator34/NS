@@ -1,11 +1,10 @@
-const UPDATE_NEW_MESSAGE_BODY = "UPDATE_NEW_MESSAGE_BODY"
+import {nanoid} from "nanoid";
+
 const SEND_MESSAGE = "SEND_MESSAGE"
 
 //action creator
-export const updateNewMessageBodyCreator = (message) => ({
-    type: UPDATE_NEW_MESSAGE_BODY,
-    body: message})
-export const sendMessageCreator = () => ({type: SEND_MESSAGE})
+
+export const sendMessageCreator = (newMessageBody) => ({type: SEND_MESSAGE, newMessageBody})
 
 const initialState = {
     messages: [
@@ -20,31 +19,20 @@ const initialState = {
         {id: 4, name: "Саша"},
         {id: 5, name: "Валера"},
     ],
-    newMessageBody: ""
 }
 
 const dialogsReducer = (state = initialState, action) => {
 
     switch (action.type) {
-        case UPDATE_NEW_MESSAGE_BODY:
-            return {
-                ...state,
-                newMessageBody : action.body
-            }
-            //stateCopy.newMessageBody = action.body
-
-
-        case SEND_MESSAGE:
+            case SEND_MESSAGE:
             const newMessage = {
-                id: 4,
-                message: state.newMessageBody
+                id: nanoid(),
+                message: action.newMessageBody
             }
             return {
                 ...state,
                 messages: [...state.messages, newMessage],
-                newMessageBody : ""
             }
-            //stateCopy.messages.push(newMessage)
 
         default:
             return state

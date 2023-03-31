@@ -1,15 +1,15 @@
+import {usersAPI, profileAPI} from "../api/api";
+import {nanoid} from "nanoid";
+
 const ADD_POST = "ADD-POST";
-const UPDATE_NEW_POST_TEXT = "UPDATE_NEW_POST_TEXT";
+const SET_USER_PROFILE = "SET_USER_PROFILE";
+const SET_STATUS = "SET STATUS"
 
 //action creator
-export const addPostCreator = () => ({type: ADD_POST})
+export const addPostCreator = (newPostText) => ({type: ADD_POST, newPostText})
+export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile})
+export const setStatus = (status) => ({type:SET_STATUS, status})
 
-export const updateNewPostTextCreator = (text) => {
-    return{
-        type: UPDATE_NEW_POST_TEXT,
-        newText:text
-    }
-}
 const initialState = {
     posts: [
         {id: 1, message: "Привет. Как твои дела", likesCount: 12},
@@ -18,15 +18,16 @@ const initialState = {
         {id: 4, message: "Буду отдыхать", likesCount: 17},
         {id: 5, message: "Понятно", likesCount: 19},
     ],
-    newPostText: "Введите новый пост"
+    profile:null,
+    status:""
 }
 
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_POST: {
             const newPost = {
-                id: 6,
-                message: state.newPostText,
+                id: nanoid(),
+                message: action.newPostText,
                 likesCount: 0
             };
             return {
@@ -39,16 +40,50 @@ const profileReducer = (state = initialState, action) => {
             // stateCopy.newPostText = ""
 
         }
-        case UPDATE_NEW_POST_TEXT: {
-            return {
+
+        case SET_USER_PROFILE:{
+            return{
                 ...state,
-                newPostText:action.newText
+                profile:action.profile
             }
-            // stateCopy.newPostText = action.newText
+        }
+        case SET_STATUS:{
+            return{
+                ...state,
+                status:action.status
+            }
         }
         default:
             return state
     }
     return state
 }
+
+
+//thunkCreator
+export const getUserProfile = (userId) => {
+    return (dispatch) => {
+        usersAPI.getProfile(userId)
+            .then(data => {
+                dispatch(setUserProfile(data))
+
+            })
+    }
+}
+export const getStatus = (userId) => (dispatch) => {
+    profileAPI.getStatus(userId)
+            .then(data => {
+
+                dispatch(setStatus(data))
+            })
+    }
+export const updateStatus = (status) => (dispatch) => {
+    profileAPI.updateStatus(status)
+        .then(data => {
+            if(data.data.resultCode === 0) {
+                dispatch(setStatus(status))
+            }
+        })
+}
+
 export default profileReducer

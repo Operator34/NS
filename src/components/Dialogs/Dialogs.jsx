@@ -3,20 +3,15 @@ import s from "./Dialogs.module.css"
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 
-const newMessage = React.createRef()
+import {Field, reduxForm} from "redux-form";
+import {Textarea} from "../common/FormsControls/FormsControls";
+import {maxLengthCreator, required} from "../../utils/validators/validators";
+const maxLength30 = maxLengthCreator(30)
+const Dialogs = ({sendMessage, dialogsPage}) => {
 
-const Dialogs = ({updateNewMessageBody, sendMessage, dialogsPage}) => {
-
-    const onSendMessageClick = () => {
-        sendMessage()
+    const addNewMessage = (values) => {
+        sendMessage(values.newMessageBody)
     }
-
-    const onNewMessageChange = (e) => {
-        const body = e.target.value
-        console.log(body)
-        updateNewMessageBody(body)
-    }
-
     const dialogElements = dialogsPage.dialogs.map( d => <DialogItem name={d.name} id={d.id} key={d.id}/>)
     const messagesElements = dialogsPage.messages.map( m => <Message message={m.message} id={m.id} key={m.id}/>)
 
@@ -25,20 +20,30 @@ const Dialogs = ({updateNewMessageBody, sendMessage, dialogsPage}) => {
             <div className={s.dialogsItems}>
                 {dialogElements}
             </div>
+
             <div className={s.messages}>
                 <div>{messagesElements}</div>
-                <div>
-                    <div>
-                        <textarea placeholder="Enter your message" ref={newMessage} onChange={onNewMessageChange} value={dialogsPage.newMessageBody}></textarea>
-                    </div>
-                    <div>
-                        <button onClick={onSendMessageClick}>Отправить</button>
-                    </div>
-                </div>
+                <AddMessageFormRedux onSubmit={addNewMessage}/>
             </div>
 
         </div>
     )
 }
+
+export const AddMessageForm = (props) => {
+    return(
+        <form onSubmit={props.handleSubmit} >
+            <div>
+                <Field component={Textarea} validate={[required, maxLength30]} name={"newMessageBody"} placeholder="Enter your message" />
+            </div>
+            <div>
+                <button>Отправить</button>
+            </div>
+        </form>
+    )
+}
+const AddMessageFormRedux = reduxForm({form:"dialogAddMessageFormRedux"})(AddMessageForm)
+
+
 
 export default Dialogs

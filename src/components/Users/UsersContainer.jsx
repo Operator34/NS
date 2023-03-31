@@ -1,35 +1,38 @@
 import React from "react";
 import {connect} from "react-redux";
-import  axios from "axios";
 
 import {
-    follow,
-    unfollow,
-    setUsers,
-    setCurrentPage,
-    setTotalUsersCount,
-    toggleIsLoading
+    follow, unfollow, setCurrentPage,  toggleFollowingProgress, getUsers
 } from "../../redux/users-reducer";
 import Users from "./Users";
-import Loader from "../../assets/images/Loader.svg"
 import Preloader from "../common/Preloader/Preloader";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
+
+
 class UsersContainer extends React.Component {
 
     componentDidMount() {
-        this.props.toggleIsLoading(true)// когда делаем запрос на сервер
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
-            this.props.toggleIsLoading(false)//когда получаем ответ от сервера
-            this.props.setUsers(response.data.items)
-            this.props.setTotalUsersCount(response.data.totalCount)
-        })
+        this.props.getUsers(this.props.currentPage, this.props.pageSize)
+        // this.props.toggleIsLoading(true)// когда делаем запрос на сервер
+        // usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+        //     .then( data => {
+        //     this.props.toggleIsLoading(false)//когда получаем ответ от сервера
+        //     this.props.setUsers(data.items)
+        //     this.props.setTotalUsersCount(data.totalCount)
+        // }) перенесено в санку
     }
+
     onPageChanged = (pageNumber) => {
-        this.props.setCurrentPage(pageNumber)
-        this.props.toggleIsLoading(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
-            this.props.toggleIsLoading(false)
-            this.props.setUsers(response.data.items)
-        })
+        this.props.getUsers(pageNumber, this.props.pageSize)
+
+        // this.props.setCurrentPage(pageNumber)
+        // this.props.toggleIsLoading(true)
+        // usersAPI.getUsers(pageNumber, this.props.pageSize)
+        //     .then(data => {
+        //     this.props.toggleIsLoading(false)
+        //     this.props.setUsers(data.items)
+        // }) перенесено в санку
     }
     render() {
         return (
@@ -43,6 +46,7 @@ class UsersContainer extends React.Component {
                     onPageChanged={this.onPageChanged}
                     follow={this.props.follow}
                     unfollow={this.props.unfollow}
+                    followingInProgress={this.props.followingInProgress}
                 />
             </>
         )
@@ -55,7 +59,9 @@ const mapStateToProps = (state) => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage:state.usersPage.currentPage,
-        isLoading:state.usersPage.isLoading
+        isLoading:state.usersPage.isLoading,
+        followingInProgress:state.usersPage.followingInProgress
+
     }
 }
 
@@ -84,14 +90,25 @@ const mapStateToProps = (state) => {
 // }
 //это делает connect под капотом
 
+// const withRedirect = withAuthRedirect(UsersContainer)
+// export default connect(mapStateToProps,
+//     {
+//         setCurrentPage,
+//         follow,
+//         unfollow,
+//         toggleFollowingProgress,
+//         getUsers
+//     }
+// )(withRedirect)
 
-export default connect(mapStateToProps,
+export default compose (
+    withAuthRedirect,
+    connect(mapStateToProps,
     {
-        setUsers,
         setCurrentPage,
-        setTotalUsersCount,
         follow,
         unfollow,
-        toggleIsLoading
+        toggleFollowingProgress,
+        getUsers
     }
-)(UsersContainer)
+))(UsersContainer)

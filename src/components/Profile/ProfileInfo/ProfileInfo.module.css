@@ -1,11 +1,34 @@
 .card img{
     width: 100%;
 }
-.avatar img{
-    width: 100px;
-    height: 100px;
+.avatar {
+    width: 200px;
+    height: 200px;
+
 }
 
-.descriptionBlock{
-    padding: 10px;
+.descriptionCard{
+
+    display: flex;
+
+}
+.descriptionInfo{
+    padding-left: 10px;
+    display:flex;
+    flex-direction: column;
+}
+.fullName{
+
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.aboutMe{
+
+}
+
+.statusJob{
+    width: 80px;
+    height: 80px;
+    border-radius: 20%;
 }

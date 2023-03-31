@@ -14,7 +14,7 @@ display: grid;
 }
 .messages{
     padding: 10px;
-    color: white;
+    color: gray;
 }
 
 .messages.message{
