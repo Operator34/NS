@@ -1,24 +1,21 @@
 import React from "react";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
-
 import Profile from "./Profile";
 import {getStatus, getUserProfile, updateStatus} from "../../redux/profile-reducer";
-
 import {compose} from "redux";
+
 
 class ProfileContainer extends React.Component  {
 
     componentDidMount () {
 
         let userId = this.props.match.params.userId//берем id из url
-        if(!userId){userId=28430}
+        console.log(this.props)
+        if(!userId){userId=this.props.authUserId
+        if(!userId){this.props.history.push("/login")}
+        }
         this.props.getUserProfile(userId)
-        // userProfileAPI.getUserProfile(userId)
-        //     .then(data => {
-        //     this.props.setUserProfile(data)
-        //
-        // }) перенесено в санку
         this.props.getStatus(userId)
 
 
@@ -45,7 +42,8 @@ class ProfileContainer extends React.Component  {
 const mapStateToProps = (state) => ({
     profile:state.profilePage.profile,
     authUserId:state.auth.userId,
-    status: state.profilePage.status
+    status: state.profilePage.status,
+    isAuth:state.auth.isAuth
 })
 
 

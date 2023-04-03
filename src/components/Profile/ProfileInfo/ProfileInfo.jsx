@@ -6,6 +6,7 @@ import noSearchJob from "../../../assets/images/noSearchJob.png"
 import ProfileStatus from "./ProfileStatus"
 
 import IconsNetWork from "./SocialNetwork/IconsNetWork";
+import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 const ProfileInfo = (props) => {
 
@@ -23,7 +24,11 @@ if(!props.profile){
                 <img alt={"avatar"} className={s.avatar} src={props.profile.photos.large}/>
                 <div className={s.descriptionInfo}>
                     <span className={s.fullName}>{props.profile.fullName}</span>
-                    <ProfileStatus
+                    {/*<ProfileStatus*/}
+                    {/*    status = {props.status}*/}
+                    {/*    updateStatus = {props.updateStatus}*/}
+                    {/*/>*/}
+                    <ProfileStatusWithHooks
                         status = {props.status}
                         updateStatus = {props.updateStatus}
                     />
