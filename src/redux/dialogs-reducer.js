@@ -1,6 +1,6 @@
 import {nanoid} from "nanoid";
 
-const SEND_MESSAGE = "SEND_MESSAGE"
+const SEND_MESSAGE = "NS/auth/SEND_MESSAGE"
 
 //action creator
 

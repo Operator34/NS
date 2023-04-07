@@ -1,8 +1,8 @@
 import {authAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
 
-const SET_USER_DATA = "SET_USER_DATA"
-const TOGGLE_IS_LOADING ="TOGGLE_IS_LOADING"
+const SET_USER_DATA = "NS/auth/SET_USER_DATA"
+const TOGGLE_IS_LOADING ="NS/auth/TOGGLE_IS_LOADING"
 
 const initialState = {
     userId: null,
@@ -37,45 +37,37 @@ export const setAuthUserData = (userId, email, login, isAuth) => ({type: SET_USE
 export const toggleIsLoading = (isLoading) => ({type: TOGGLE_IS_LOADING, isLoading})
 
 //thunk
-export const getAuthUserData = () => {
-    return (dispatch) => {
-        dispatch(toggleIsLoading(true))
-        return authAPI.me()
-            .then(data => {
-                dispatch(toggleIsLoading(false))
-                if (data.resultCode === 0) {
-                    const {id, email, login} = data.data
-                    dispatch(setAuthUserData(id, email, login, true))
-                }
-            })
+export const getAuthUserData = () => async (dispatch) => {
+    dispatch(toggleIsLoading(true))
+    const response = await authAPI.me()
+    dispatch(toggleIsLoading(false))
+    if (response.resultCode === 0) {
+        const {id, email, login} = response.data
+        dispatch(setAuthUserData(id, email, login, true))
     }
 }
 
-export const login = (email, password, rememberMe) => (dispatch) => {
+export const login = (email, password, rememberMe) => async (dispatch) => {
+    dispatch(toggleIsLoading(true))
+    const response = await authAPI.login(email, password, rememberMe)
+    dispatch(toggleIsLoading(false))
+    if (response.resultCode === 0) {
+        dispatch(getAuthUserData())
+    } else {
+        const message = response.messages.length > 0 ? response.messages[0] : "Some Error"
+        dispatch(stopSubmit("login", {_error: message}))
+    }
 
-
-        dispatch(toggleIsLoading(true))
-    authAPI.login(email, password, rememberMe)
-            .then(data => {
-                dispatch(toggleIsLoading(false))
-                if (data.resultCode === 0) {
-                    dispatch(getAuthUserData())
-                }else{
-                    const message = data.messages.length > 0 ? data.messages[0]: "Some Error"
-                    dispatch(stopSubmit("login",{_error:message}))
-                }
-            })
 }
 
-export const logout = () => (dispatch) => {
+export const logout = () => async (dispatch) => {
     dispatch(toggleIsLoading(true))
-    authAPI.logout()
-        .then(data => {
-            dispatch(toggleIsLoading(false))
-            if (data.resultCode === 0) {
-                dispatch(setAuthUserData(null, null, null, false))
-            }
-        })
+    const response = await authAPI.logout()
+    dispatch(toggleIsLoading(false))
+    if (response.resultCode === 0) {
+        dispatch(setAuthUserData(null, null, null, false))
+    }
+
 }
 
 export default authReducer

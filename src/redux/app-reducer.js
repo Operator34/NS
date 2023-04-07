@@ -1,6 +1,6 @@
 import {getAuthUserData} from "./auth-reducer";
 
-const INITIALIZED_SUCCESS = "INITIALIZED_SUCCESS"
+const INITIALIZED_SUCCESS = "NS/app/INITIALIZED_SUCCESS"
 
 
 //action creator

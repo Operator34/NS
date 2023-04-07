@@ -3,39 +3,31 @@ import s from "./ProfileInfo.module.css"
 import Preloader from "../../common/Preloader/Preloader";
 import searchJob from "../../../assets/images/searchJob.png"
 import noSearchJob from "../../../assets/images/noSearchJob.png"
-import ProfileStatus from "./ProfileStatus"
+import userPhoto from "../../../assets/images/default_avatar.png";
 
 import IconsNetWork from "./SocialNetwork/IconsNetWork";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
-const ProfileInfo = (props) => {
+const ProfileInfo = ({profile, status, updateStatus}) => {
 
 
-if(!props.profile){
+if(!profile){
     return <Preloader/>
 }
     return (
         <div >
-            {/*<div className={s.card}>*/}
-            {/*    <img src='https://webmg.ru/wp-content/uploads/2022/11/i-25-52-2048x1365.jpeg' alt='card'></img>*/}
-            {/*</div>*/}
-
             <div className={s.descriptionCard}>
-                <img alt={"avatar"} className={s.avatar} src={props.profile.photos.large}/>
+                <img alt={"avatar"} className={s.avatar} src={profile.photos.large ? profile.photos.large : userPhoto}/>
                 <div className={s.descriptionInfo}>
-                    <span className={s.fullName}>{props.profile.fullName}</span>
-                    {/*<ProfileStatus*/}
-                    {/*    status = {props.status}*/}
-                    {/*    updateStatus = {props.updateStatus}*/}
-                    {/*/>*/}
+                    <span className={s.fullName}>{profile.fullName}</span>
                     <ProfileStatusWithHooks
-                        status = {props.status}
-                        updateStatus = {props.updateStatus}
+                        status = {status}
+                        updateStatus = {updateStatus}
                     />
-                    <span className={s.aboutMe}>{`Обо мне: ${props.profile.aboutMe}`}</span>
-                    <img alt={"job"} className={s.statusJob} src={ props.profile.lookingForAJob ? searchJob : noSearchJob}/>
-                    <IconsNetWork link={props.profile.contacts.twitter}
-                                  contacts={props.profile.contacts}/>
+                    <span className={s.aboutMe}>{`Обо мне: ${profile.aboutMe}`}</span>
+                    <img alt={"job"} className={s.statusJob} src={ profile.lookingForAJob ? searchJob : noSearchJob}/>
+                    <IconsNetWork link={profile.contacts.twitter}
+                                  contacts={profile.contacts}/>
                 </div>
             </div>
         </div>

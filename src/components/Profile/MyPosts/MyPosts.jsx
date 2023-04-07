@@ -8,8 +8,13 @@ import {Textarea} from "../../common/FormsControls/FormsControls";
 
 //const newPostElement = React.createRef() //создаем ссылку, привязываем ссылку к textarea
 const maxLength10 = maxLengthCreator(10)
-const MyPosts = ( {posts, addPost}  ) => {
-    const postsElements = posts.map(p => <Post message={p.message} likeCount={p.likesCount} key={p.id}/>)
+
+const MyPosts = React.memo( ( {posts, addPost}  ) => {
+console.log("RENDER")
+    const postsElements =
+        [...posts]
+            .reverse()
+            .map(p => <Post message={p.message} likeCount={p.likesCount} key={p.id}/>)
 
     const onAddPost = (values) => {
         addPost(values.newPostText)
@@ -23,7 +28,7 @@ const MyPosts = ( {posts, addPost}  ) => {
             </div>
         </div>
     )
-}
+})
 
 export const AddNewPostForm = (props) => {
     return (
