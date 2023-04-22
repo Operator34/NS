@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.css": "/NS/static/css/main.772093ad.css",
+    "main.js": "/NS/static/js/main.77405139.js",
+    "static/css/243.b794e704.chunk.css": "/NS/static/css/243.b794e704.chunk.css",
+    "static/js/243.3b7fc66a.chunk.js": "/NS/static/js/243.3b7fc66a.chunk.js",
+    "static/css/271.bdfe5231.chunk.css": "/NS/static/css/271.bdfe5231.chunk.css",
+    "static/js/271.9cc8051b.chunk.js": "/NS/static/js/271.9cc8051b.chunk.js",
+    "static/media/searchJob.png": "/NS/static/media/searchJob.2e5c6a1851826b6e4e32.png",
+    "static/media/icon-web.png": "/NS/static/media/icon-web.8035babc39d5681992bf.png",
+    "static/media/default_avatar.png": "/NS/static/media/default_avatar.4c5fd143a064c0b318e1.png",
+    "static/media/icon-instagram.png": "/NS/static/media/icon-instagram.15d77dca0ebcbb9aa0d5.png",
+    "static/media/noSearchJob.png": "/NS/static/media/noSearchJob.f494e8dbcc41ff2e6631.png",
+    "static/media/icon-vkontakte.png": "/NS/static/media/icon-vkontakte.f0e87036943d99663821.png",
+    "static/media/icon-twitter.png": "/NS/static/media/icon-twitter.93ac3f9a344ecd5d01a4.png",
+    "static/media/icon-youtube.png": "/NS/static/media/icon-youtube.060528b6e83f2004078d.png",
+    "static/media/icon-github.png": "/NS/static/media/icon-github.f11021803f68852df283.png",
+    "static/media/icon-facebook.png": "/NS/static/media/icon-facebook.9a6e212e214e7aef33e5.png",
+    "static/media/Loader.svg": "/NS/static/media/Loader.bf8dc61b10f05db9d0f56c3ed7418a70.svg",
+    "index.html": "/NS/index.html",
+    "main.772093ad.css.map": "/NS/static/css/main.772093ad.css.map",
+    "main.77405139.js.map": "/NS/static/js/main.77405139.js.map",
+    "243.b794e704.chunk.css.map": "/NS/static/css/243.b794e704.chunk.css.map",
+    "243.3b7fc66a.chunk.js.map": "/NS/static/js/243.3b7fc66a.chunk.js.map",
+    "271.bdfe5231.chunk.css.map": "/NS/static/css/271.bdfe5231.chunk.css.map",
+    "271.9cc8051b.chunk.js.map": "/NS/static/js/271.9cc8051b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.772093ad.css",
+    "static/js/main.77405139.js"
+  ]
+}
