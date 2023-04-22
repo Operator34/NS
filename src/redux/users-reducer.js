@@ -12,7 +12,7 @@ const TOGGLE_IS_FOLLOWING_PROGRESS = "NS/auth/TOGGLE_IS_FOLLOWING_PROGRESS"
 
 const initialState = {
     users: [],
-    pageSize: 10,
+    pageSize: 20,
     totalUsersCount: 0,
     currentPage: 1,
     isLoading: true,
